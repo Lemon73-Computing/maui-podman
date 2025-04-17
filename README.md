@@ -15,7 +15,7 @@ sudo podman build -t maui-env .
 This will build MAUI along with GtkSharp already. Then visit the container using:
 
 ```sh
-sudo podman run -i --rm -t maui-env bash
+sudo podman run -i --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix maui-env bash
 ```
 
 Visual Studio Code is encouraged: Install VS Codes 'Dev Containers' extension, then right click the 
