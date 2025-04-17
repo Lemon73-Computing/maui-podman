@@ -28,5 +28,5 @@ RUN dotnet build Microsoft.Maui.BuildTasks.slnf
 RUN dotnet build Microsoft.Maui.Gtk.slnf
 
 # running the sample app won't work as the container doesn't have a display attached -- use VS Code to do the trick!
-# WORKDIR cd /mauienv/maui-linux/src/Controls/samples/Controls.Sample
+# WORKDIR /mauienv/maui-linux/src/Controls/samples/Controls.Sample
 # dotnet run --framework net8.0-gtk
