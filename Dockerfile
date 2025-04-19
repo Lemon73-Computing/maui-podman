@@ -1,3 +1,8 @@
+# ---
+# MIT License, Original Creator: Thomas Mielke (https://github.com/thomiel)
+# Source: https://github.com/Thomas-Mielke-Software/maui-docker
+# ---
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0
 
 WORKDIR /mauienv
@@ -29,4 +34,4 @@ RUN dotnet build Microsoft.Maui.Gtk.slnf
 
 # running the sample app won't work as the container doesn't have a display attached -- use VS Code to do the trick!
 # WORKDIR /mauienv/maui-linux/src/Controls/samples/Controls.Sample
-# dotnet run --framework net8.0-gtk
+# RUN dotnet run --framework net8.0-gtk
