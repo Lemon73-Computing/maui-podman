@@ -1,10 +1,12 @@
 # maui-podman -- a Docker container for reproducably setting up a MAUI development environment
 
-This is intended to demonstrate issues with [maui-linux](https://github.com/jsuarezruiz/maui-linux) and not 
-for active development as changes in the container would get lost on a `podman build`.
+This is currendly only intended to demonstrate issues with the [MAUI](https://github.com/lytico/maui) Gtk platform and not 
+for active development as changes in the container would get lost on a `podman build`. I'm working on a devcontainer setup to have the maui folder mounted as a docker volume to persist changes to the codebase.
 
+<!--
 Note: You need to have [Podman](https://podman.io/docs/installation) installed and set up 
 on your system to use this.
+-->
 
 After git-cloning and cd into the repo, build the image:
 
@@ -12,20 +14,36 @@ After git-cloning and cd into the repo, build the image:
 sudo podman build -t maui-env .
 ```
 
-This will build MAUI along with GtkSharp already. Then visit the container using:
+This will build MAUI along with GtkSharp already. Then start the container (which can take a minute) using:
 
 ```sh
-sudo podman run -i --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix maui-env bash
+xhost +  # allow container to use the X display of the host
+docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix maui-env bash
+xhost -  # restrict display access again
 ```
 
-Visual Studio Code is encouraged: Install VS Codes 'Dev Containers' extension, then right click the 
-maui-env container and attach it to VS Code. To launch a sample app, start go to Open Folder in VS Code,
-choose /mauienv/maui-linux, let Code install recommended extensions,  and enter these commands in VS Codes terminal window:
+Alternatively, use Visual Studio Code to handle the display and have a deeper look at the MAUI sources:
+* Start VS Code in a new bash outside the container with `code .`,
+* then install VS Codes 'Dev Containers' and 'Docker' extension. After that, 
+* in the 'Containers' item of side panel start the 'maui-env' container and right click / attach it to VS Code, 
+* then click the generated container name at the top. 
+* In the newly opened Code window, wait a few seconds until VS Code is setup in the container.
+
+Finally open folder /mauienv/maui/ and enter these commands in VS Codes terminal window:
 
 ```sh
-cd /mauienv/maui-linux/src/Controls/samples/Controls.Sample
+cd /mauienv/maui/src/Controls/samples/Controls.Sample
 dotnet run --framework net8.0-gtk
 ```
 
-VS Code will then do some magic and start the gtk app on the container's host, without the need to explicitely install a .NET runtime there.
+![Controls.Sample](https://raw.githubusercontent.com/Thomas-Mielke-Software/maui-docker/d77cd672b4586fcfbe5a9aea89dff0ea8cfee3f2/pics/ControlsSample.png)
 
+Also have a look at
+
+```sh
+cd ../Controls.Sample.Gtk
+cp ../Controls.Sample/Resources/Images/calculator.png ./dotnet_bot.png  # someone forgot to git add the image
+dotnet run
+```
+
+![Controls.Sample.Gtk](https://raw.githubusercontent.com/Thomas-Mielke-Software/maui-docker/d77cd672b4586fcfbe5a9aea89dff0ea8cfee3f2/pics/ControlsSampleGtk.png)
