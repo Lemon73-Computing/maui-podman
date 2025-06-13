@@ -26,8 +26,8 @@ RUN dotnet new install GtkSharp.Template.CSharp
 WORKDIR /mauienv
 # as of commit c005e3a -> should build on linux
 # note: comment out all following commands, if you maintain your own maui(-linux) folder as a container volume:
-RUN git clone https://github.com/lytico/maui
-WORKDIR /mauienv/maui
+RUN git clone https://github.com/Lemon73-Computing/maui-linux
+WORKDIR /mauienv/maui-linux
 
 # make sure only include Gtk platform
 # see also https://github.com/lytico/maui/blob/6ef7f0c066808ea0d4142812ef4d956245e6a711/.github/workflows/build-gtk.yml#L34-L36
@@ -43,9 +43,9 @@ RUN sed -i 's/_IncludeMacOS>true</_IncludeMacOS></g' Directory.Build.Override.pr
 RUN dotnet build Microsoft.Maui.BuildTasks.slnf
 RUN dotnet build Microsoft.Maui.Gtk.slnf
 RUN apt clean
-WORKDIR /mauienv/maui/src/Controls/samples/Controls.Sample
+WORKDIR /mauienv/maui-linux/src/Controls/samples/Controls.Sample
 # RUN dotnet run --framework net8.0-gtk
 
 # on the local terminal type:
-# xhost + & docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -t maui-env dotnet run --framework net8.0-gtk & xhost -
+# xhost + & podman run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix maui-env dotnet run --framework net8.0-gtk & xhost -
 # alternatively, you could omit the xhost commands and attach a VS Code instance to the container and run it there.

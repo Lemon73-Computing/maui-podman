@@ -29,10 +29,10 @@ Alternatively, use Visual Studio Code to handle the display and have a deeper lo
 * then click the generated container name at the top. 
 * In the newly opened Code window, wait a few seconds until VS Code is setup in the container.
 
-Finally open folder /mauienv/maui/ and enter these commands in VS Codes terminal window:
+Finally open folder /mauienv/maui-linux/ and enter these commands in VS Codes terminal window:
 
 ```sh
-cd /mauienv/maui/src/Controls/samples/Controls.Sample
+cd /mauienv/maui-linux/src/Controls/samples/Controls.Sample
 dotnet run --framework net8.0-gtk
 ```
 
