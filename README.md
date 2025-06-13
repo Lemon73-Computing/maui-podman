@@ -1,7 +1,7 @@
-# maui-podman -- a Docker container for reproducably setting up a MAUI development environment
+# maui-podman -- a Podman container for reproducably setting up a MAUI development environment
 
 This is currendly only intended to demonstrate issues with the [MAUI](https://github.com/lytico/maui) Gtk platform and not 
-for active development as changes in the container would get lost on a `podman build`. I'm working on a devcontainer setup to have the maui folder mounted as a docker volume to persist changes to the codebase.
+for active development as changes in the container would get lost on a `podman build`. I'm working on a devcontainer setup to have the maui folder mounted as a podman volume to persist changes to the codebase.
 
 <!--
 Note: You need to have [Podman](https://podman.io/docs/installation) installed and set up 
@@ -18,7 +18,7 @@ This will build MAUI along with GtkSharp already. Then start the container (whic
 
 ```sh
 xhost +  # allow container to use the X display of the host
-docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix maui-env bash
+podman run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix maui-env bash
 xhost -  # restrict display access again
 ```
 
@@ -36,7 +36,7 @@ cd /mauienv/maui/src/Controls/samples/Controls.Sample
 dotnet run --framework net8.0-gtk
 ```
 
-![Controls.Sample](https://raw.githubusercontent.com/Thomas-Mielke-Software/maui-docker/d77cd672b4586fcfbe5a9aea89dff0ea8cfee3f2/pics/ControlsSample.png)
+![Controls.Sample](./pics/ControlsSample.png)
 
 Also have a look at
 
@@ -46,4 +46,4 @@ cp ../Controls.Sample/Resources/Images/calculator.png ./dotnet_bot.png  # someon
 dotnet run
 ```
 
-![Controls.Sample.Gtk](https://raw.githubusercontent.com/Thomas-Mielke-Software/maui-docker/d77cd672b4586fcfbe5a9aea89dff0ea8cfee3f2/pics/ControlsSampleGtk.png)
+![Controls.Sample.Gtk](./pics/ControlsSampleGtk.png)
