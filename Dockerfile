@@ -39,6 +39,7 @@ RUN sed -i 's/_IncludeIos>true</_IncludeIos></g' Directory.Build.Override.props
 RUN sed -i 's/_IncludeMacCatalyst>true</_IncludeMacCatalyst></g' Directory.Build.Override.props
 RUN sed -i 's/_IncludeMacOS>true</_IncludeMacOS></g' Directory.Build.Override.props
  
+RUN dotnet workload install android --source https://api.nuget.org/v3/index.json
 # RUN dotnet workload restore
 RUN dotnet build Microsoft.Maui.BuildTasks.slnf
 RUN dotnet build Microsoft.Maui.Gtk.slnf
