@@ -28,6 +28,8 @@ WORKDIR /mauienv
 # note: comment out all following commands, if you maintain your own maui(-linux) folder as a container volume:
 RUN git clone https://github.com/Lemon73-Computing/maui-linux
 WORKDIR /mauienv/maui-linux
+RUN git fetch --prune
+RUN git checkout lemon73/implement-radiobutton
 
 # make sure only include Gtk platform
 # see also https://github.com/lytico/maui/blob/6ef7f0c066808ea0d4142812ef4d956245e6a711/.github/workflows/build-gtk.yml#L34-L36
@@ -38,8 +40,8 @@ RUN sed -i 's/_IncludeAndroid>true</_IncludeAndroid></g' Directory.Build.Overrid
 RUN sed -i 's/_IncludeIos>true</_IncludeIos></g' Directory.Build.Override.props
 RUN sed -i 's/_IncludeMacCatalyst>true</_IncludeMacCatalyst></g' Directory.Build.Override.props
 RUN sed -i 's/_IncludeMacOS>true</_IncludeMacOS></g' Directory.Build.Override.props
- 
-RUN dotnet workload install android --source https://api.nuget.org/v3/index.json
+
+# RUN dotnet workload install android --source https://api.nuget.org/v3/index.json
 # RUN dotnet workload restore
 RUN dotnet build Microsoft.Maui.BuildTasks.slnf
 RUN dotnet build Microsoft.Maui.Gtk.slnf

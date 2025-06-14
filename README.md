@@ -18,7 +18,7 @@ This will build MAUI along with GtkSharp already. Then start the container (whic
 
 ```sh
 xhost +  # allow container to use the X display of the host
-podman run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix maui-env bash
+sudo podman run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix maui-env bash
 xhost -  # restrict display access again
 ```
 
