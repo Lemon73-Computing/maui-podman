@@ -27,16 +27,20 @@ RUN dotnet cake --verbosity=diagnostic --BuildTarget=InstallWorkload
 RUN apt update
 RUN apt install -y libgtk-3-dev libgtksourceview-4-0
 RUN dotnet new install GtkSharp.Template.CSharp
+# RUN dotnet workload install maui-android
 
 # Install MAUI
 WORKDIR /mauienv
+# Create Maui Sample App
+# RUN dotnet new maui -o maui-sample-app
+
 # As of commit c005e3a -> should build on linux
 # [NOTE] Comment out all following commands, if you maintain your own maui(-linux) folder as a container volume:
 RUN git clone https://github.com/Lemon73-Computing/maui-linux
 WORKDIR /mauienv/maui-linux
 RUN git fetch --prune
-RUN git checkout lemon73/implement-radiobutton
-RUN apt install vim
+# RUN git checkout lemon73/implement
+RUN apt install -y vim
 
 # Make sure only include Gtk platform
 # [FYI] https://github.com/lytico/maui/blob/6ef7f0c066808ea0d4142812ef4d956245e6a711/.github/workflows/build-gtk.yml#L34-L36
