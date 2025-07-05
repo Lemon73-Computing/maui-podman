@@ -12,6 +12,9 @@ After git-cloning and cd into the repo, build the image:
 
 ```sh
 sudo podman build -t maui-env .
+
+# Clear cache
+sudo podman build --no-cache -t maui-env .
 ```
 
 This will build MAUI along with GtkSharp already. Then start the container (which can take a minute) using:
