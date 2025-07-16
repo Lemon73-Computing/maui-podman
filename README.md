@@ -12,13 +12,16 @@ After git-cloning and cd into the repo, build the image:
 
 ```sh
 sudo podman build -t maui-env .
+
+# Clear cache
+sudo podman build --no-cache -t maui-env .
 ```
 
 This will build MAUI along with GtkSharp already. Then start the container (which can take a minute) using:
 
 ```sh
 xhost +  # allow container to use the X display of the host
-podman run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix maui-env bash
+sudo podman run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix maui-env bash
 xhost -  # restrict display access again
 ```
 
@@ -29,10 +32,10 @@ Alternatively, use Visual Studio Code to handle the display and have a deeper lo
 * then click the generated container name at the top. 
 * In the newly opened Code window, wait a few seconds until VS Code is setup in the container.
 
-Finally open folder /mauienv/maui/ and enter these commands in VS Codes terminal window:
+Finally open folder /mauienv/maui-linux/ and enter these commands in VS Codes terminal window:
 
 ```sh
-cd /mauienv/maui/src/Controls/samples/Controls.Sample
+cd /mauienv/maui-linux/src/Controls/samples/Controls.Sample
 dotnet run --framework net8.0-gtk
 ```
 

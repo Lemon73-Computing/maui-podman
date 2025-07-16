@@ -6,7 +6,7 @@
   },
   "workspaceFolder": "/mauienv",
 //  "workspaceMount": "/home/thomas/maui-docker/maui,target=/mauienv,type=bind,consistency=cached",
-  "workspaceMount": "source=${localWorkspaceFolder}/maui,target=/mauienv,type=bind,consistency=delegated",
+  "workspaceMount": "source=${localWorkspaceFolder}/maui-linux,target=/mauienv,type=bind,consistency=delegated",
 //  "mounts": [
 //    "source=${localWorkspaceFolder}/maui,target=/mauienv,type=bind,consistency=cached"
 //  ],
@@ -15,7 +15,7 @@
       "extensions": [
         "ms-dotnettools.csharp",
         "ms-vscode.mono-debug",
-        "eamodio.gitlens"
+        "mhutchie.git-graph"
       ]
     }
   },
