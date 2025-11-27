@@ -4,6 +4,9 @@
     "dockerfile": "../Dockerfile",
     "context": ".."
   },
+  "mounts": [
+    "source=${localWorkspaceFolder}/.vscode,target=/mauienv/.vscode,type=bind,consistency=cached"
+  ],
   "workspaceFolder": "/mauienv",
   "workspaceMount": "source=${localWorkspaceFolder}/maui,target=/mauienv/maui,type=bind,consistency=cached",
   "customizations": {

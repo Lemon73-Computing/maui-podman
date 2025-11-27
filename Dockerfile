@@ -1,9 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0
 
 WORKDIR /mauienv
-COPY  launch.json .vscode/launch.json
-COPY tasks.json .vscode/tasks.json
-# TODO: add .vs-code volume
 
 # set environment variable/path
 ENV DOTNET_ROOT=/usr/share/dotnet
