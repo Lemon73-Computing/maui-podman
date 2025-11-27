@@ -1,9 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0
 
 WORKDIR /mauienv
-COPY  launch.json .vscode/launch.json
-COPY tasks.json .vscode/tasks.json
-# TODO: add .vs-code volume
 
 # set environment variable/path
 ENV DOTNET_ROOT=/usr/share/dotnet
@@ -16,10 +13,13 @@ RUN sed -i 's/"8.0.100", "8.0.200"}/"8.0.100", "8.0.200", "8.0.300", "8.0.400"}/
 RUN dotnet tool restore
   # ^ this allows debugging using the vscode devcontainer extension 
 RUN dotnet cake --verbosity=diagnostic --BuildTarget=InstallWorkload
-RUN apt update
-RUN apt install -y libgtk-3-dev libgtksourceview-4-0
+RUN apt update && \
+    apt install -y libgtk-3-dev libgtksourceview-4-0 && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/*
 RUN dotnet new install GtkSharp.Template.CSharp
 WORKDIR /mauienv
+RUN rm -rf ./GtkSharp
 
 # ___ Optional Setup with Persistent Volume Share on Local Host __
 # if you want to maintain a maui folder locally, mapped as a container volume to persist changes done in the container,
@@ -44,9 +44,7 @@ RUN sed -i 's/>true<\/_Include/><\/_Include/g' Directory.Build.Override.props*
 RUN sed -i 's/_IncludeGtk></_IncludeGtk>true</g' Directory.Build.Override.props*
 RUN dotnet build Microsoft.Maui.BuildTasks.slnf
 RUN dotnet build Microsoft.Maui.Gtk.slnf
-RUN apt clean
 WORKDIR /mauienv/maui/src/Controls/samples/Controls.Sample
 # on the local terminal type:
 # xhost + & docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -t maui-env dotnet run --framework net8.0-gtk & xhost -
 # alternatively, you could omit the xhost commands and attach a VS Code instance to the container and run it there.
-
