@@ -46,5 +46,5 @@ RUN dotnet build Microsoft.Maui.BuildTasks.slnf
 RUN dotnet build Microsoft.Maui.Gtk.slnf
 WORKDIR /mauienv/maui/src/Controls/samples/Controls.Sample
 # on the local terminal type:
-# xhost + & docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -t maui-env dotnet run --framework net8.0-gtk & xhost -
+# host + ; echo "starting up; this can take a minute." ; docker run -it --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -t maui-env dotnet run --framework net8.0-gtk ; xhost -
 # alternatively, you could omit the xhost commands and attach a VS Code instance to the container and run it there.
