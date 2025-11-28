@@ -17,7 +17,7 @@ You can choose to use github packages or use the source.
 
 ```sh
 # Pull Docker package
-docker pull ghcr.io/MauiGtk/maui-docker:main
+docker pull ghcr.io/mauigtk/maui-docker:main
 
 # Build Docker environment
 xhost +  # allow container to use the X display of the host
